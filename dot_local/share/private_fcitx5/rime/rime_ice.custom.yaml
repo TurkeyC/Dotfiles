@@ -1,0 +1,35 @@
+# 雾凇拼音自定义配置
+# 修改后需要重新部署 Rime 才能生效
+
+patch:
+  # 模糊拼音（注释掉对应行可禁用某项）
+  "speller/algebra":
+    __append:
+      # 平翘舌模糊: zh/ch/sh ↔ z/c/s
+      # - derive/^([zcs])h/$1/
+      # - derive/^([zcs])([^h])/$1h$2/
+      # 鼻音混淆: n ↔ l
+      # - derive/^l/n/
+      # - derive/^n/l/
+      # 前后鼻音模糊
+      # - derive/ang$/an/
+      # - derive/an$/ang/
+      - derive/eng$/en/
+      - derive/en$/eng/
+      - derive/ing$/in/
+      - derive/in$/ing/
+
+  # 启动时始终默认为中文模式
+  "switches/ascii_mode/reset": 0
+
+  # 万象语法模型
+  "grammar/language": wanxiang-lts-zh-hans
+  "grammar/collocation_max_length": 5
+  "grammar/collocation_min_length": 2
+  "grammar/collocation_penalty": -10
+  "grammar/non_collocation_penalty": -17
+
+  # 上下文联想
+  "translator/contextual_suggestions": true
+  "translator/max_homophones": 7
+  "translator/max_homographs": 7

@@ -1,0 +1,17 @@
+{
+  "model": "haiku",
+  "worktree": {
+    "baseRef": "fresh"
+  },
+  "enabledPlugins": {
+    "rust-analyzer-lsp@claude-plugins-official": true
+  },
+  "language": "中文",
+  "skipWebFetchPreflight": true,
+  "effortLevel": "high",
+  "autoUpdatesChannel": "stable",
+  "minimumVersion": "2.1.156",
+  "theme": "dark",
+  "editorMode": "normal",
+  "autoUpdates": false
+}

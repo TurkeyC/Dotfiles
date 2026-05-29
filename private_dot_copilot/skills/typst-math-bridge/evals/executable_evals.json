@@ -1,0 +1,29 @@
+{
+  "skill_name": "typst-math-bridge",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "把这段 LaTeX 迁移成 Typst，并保持对齐：\\begin{align} \\sum_{k=1}^{n}k &= \\frac{n(n+1)}{2} \\\\ f(x) &= \\begin{cases} x^2, & x>0 \\\\ 0, & x\\le0 \\end{cases} \\end{align}",
+      "expected_output": "输出纯 Typst 公式，使用块级 $ ... $、& 对齐、cases(...)，无 LaTeX 环境残留。",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我在 Typst 里写了 $ \\frac{a+b}{c} $ 和 $ \\left( x / y \\right) $ 报错，请改成正确写法，并解释为什么。",
+      "expected_output": "将 LaTeX 命令替换为 Typst 等价写法，解释自动定界符缩放与 frac/斜杠语法。",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "请给我一个 Typst 示例：包含 3x3 增广矩阵、向量内积、上方括号注释、以及一条带 cancel 的化简公式。",
+      "expected_output": "给出可编译 Typst 片段，覆盖 mat(augment)、vec、overbrace/underbrace、cancel。",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "把下面 LaTeX 符号密集公式迁移到 Typst：\\forall x\\in A,\\; x\\notin B \\implies f: A\\to B, \\; \\sum_{i=1}^n x_i \\leq \\int_0^1 g(t)\\,\\mathrm dt, \\; \\alpha\\Rightarrow\\beta \\Leftrightarrow \\gamma",
+      "expected_output": "输出 Typst 版本并优先使用 sym 命名或 shorthand（forall/in.not/arrow.r.double/arrow.l.r.double/sum/integral/dif/lt.eq），无 LaTeX 宏残留。",
+      "files": []
+    }
+  ]
+}

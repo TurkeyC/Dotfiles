@@ -1,0 +1,110 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/casuki/VenvG_Native/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/casuki/VenvG_Native/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/casuki/VenvG_Native/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/casuki/VenvG_Native/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# ====== 自动补全 ======
+if [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+fi
+
+# ===== Python 工具统一配置 (VenvG_Native) =====
+export VENVG_ROOT="/home/casuki/VenvG_Native"
+
+# Conda
+export PATH="$VENVG_ROOT/miniforge3/bin:$PATH"
+
+# uv
+export PATH="$VENVG_ROOT/uv-bin:$PATH"
+export UV_CACHE_DIR="$VENVG_ROOT/uv-cache"
+export UV_PYTHON_DOWNLOAD=false
+export UV_MANAGED_PYTHON=false
+
+# pip
+export PIP_CACHE_DIR="$VENVG_ROOT/pip-cache"
+
+# 创建所有必要目录
+mkdir -p "$VENVG_ROOT"/{miniforge3,uv-bin,uv-cache,pip-cache}
+
+
+# ====== 配置HuggingFace ======
+export HF_HOME="/mnt/g/Dataset_Models/HuggingFace"
+export HF_ENDPOINT=https://hf-mirror.com
+
+export MODELSCOPE_CACHE="/mnt/g/Dataset_Models/ModelScope"
+
+
+# ====== 配置 Rust ======
+# 设置安装根目录
+export RUSTUP_HOME="$VENVG_ROOT/rust/rustup"
+# 设置 Cargo 主目录（包含二进制文件和缓存）
+export CARGO_HOME="$VENVG_ROOT/rust/cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
+# 设置清华镜像源
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+
+
+# ====== 配置CUDA Toolkits ======
+export PATH="/home/casuki/VenvG_Native/cuda-toolkits/cuda-13.0/bin:$PATH"
+export LD_LIBRARY_PATH="/home/casuki/VenvG_Native/cuda-toolkits/cuda-13.0/lib64:$LD_LIBRARY_PATH"
+
+# ====== 配置Typst ======
+export PATH="/home/casuki/VenvG_Native/typst/:$PATH"
+
+# ====== 配置Lean4 ======
+export ELAN_HOME="/home/casuki/VenvG_Native/lean/lean_4.2.1"
+
+# ====== 配置GenAct ======
+export PATH="/home/casuki/ExtraG/App/GenAct:$PATH"
+
+# ====== 配置.net8 ======
+export DOTNET_ROOT="/home/casuki/VenvG_Native/dotnet/"
+export PATH=$PATH:$DOTNET_ROOT
+
+# ====== 其他 =====
+alias neofetch='fastfetch'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+# 引入~/.profile
+source ~/.user-profile

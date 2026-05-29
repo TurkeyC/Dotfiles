@@ -1,0 +1,32 @@
+# yazi.toml
+[mgr]
+show_hidden = true
+
+[opener]
+edit = [
+	# { run = '${EDITOR:-vi} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+	{ run = 'micro "$@"', desc = "micro", block = true, for = "unix" },
+    # ... 其他配置
+]
+
+[open]
+rules = [
+	# Folder
+	{ url = "*/", use = ["edit", "open", "reveal"] },
+	# Text
+	{ mime = "text/*", use = ["edit", "reveal"] },
+	# Image
+	{ mime = "image/*", use = ["open", "reveal"] },
+	# Media
+	{ mime = "{audio,video}/*", use = ["play", "reveal"] },
+	# Archive
+	{ mime = "application/{,g}zip", use = ["extract", "reveal"] },
+	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", use = ["extract", "reveal"] },
+	# JSON
+	{ mime = "application/{json,x-ndjson}", use = ["edit", "reveal"] },
+	{ mime = "*/javascript", use = ["edit", "reveal"] },
+	# Empty file
+	{ mime = "inode/x-empty", use = ["edit", "reveal"] },
+	# Fallback
+	{ url = "*", use = ["open", "reveal"] },
+]

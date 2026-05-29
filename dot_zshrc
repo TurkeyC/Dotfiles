@@ -1,0 +1,167 @@
+# .zshrc
+
+# ===== oh my zsh 配置 =====
+export ZSH="$HOME/.oh-my-zsh"
+# 配置主题
+ZSH_THEME="essembeh"
+# 配置插件，详见https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+plugins=(
+  git
+  python
+  extract
+  z
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# ===== 系统级配置 =====
+# Fedora 上 Zsh 的系统配置通常是 /etc/zshrc
+if [ -f /etc/zshrc ]; then
+    . /etc/zshrc
+fi
+
+# ===== 用户环境变量 (PATH) =====
+# Zsh 同样支持 [[ ... =~ ... ]] 语法
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# ===== 自定义脚本目录 =====
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+
+# ===== Conda 初始化 (重要) =====
+# 建议运行 conda init zsh 自动生成此块，而非手动复制 bash 的
+# 下面是一个示例结构，具体请以 conda init 生成的为准
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/casuki/VenvG_Native/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/casuki/VenvG_Native/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/casuki/VenvG_Native/miniforge3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/casuki/VenvG_Native/miniforge3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+# 如果是在 Ghostty 中，则自动退出 conda base 环境
+if [ "$GHOSTTY_TERM" = "1" ]; then
+    conda deactivate
+fi
+# 如果是在 Ghostty 中，则确保 conda base bin 目录不在 PATH 中（并防止 conda 命令自动把它加回去）
+# >>> Ghostty Conda Python Isolation >>>
+if [ "$GHOSTTY_TERM" = "1" ]; then
+    # 你的 Conda 基础 bin 目录路径 (请根据实际路径确认)
+    local CONDA_BASE_BIN="/home/casuki/VenvG_Native/miniforge3/bin"
+
+    # 定义清理函数
+    _ghostty_clean_conda_path() {
+        # 将 PATH 按冒号分割为数组
+        local IFS=':'
+        local -a path_array=(${(s.:.)PATH})
+        local -a new_path_array=()
+        
+        # 遍历并排除 Conda 基础 bin 目录
+        for entry in "${path_array[@]}"; do
+            if [ "$entry" != "$CONDA_BASE_BIN" ]; then
+                new_path_array+=("$entry")
+            fi
+        done
+        
+        # 重新组合 PATH
+        PATH="${(j.:.)new_path_array}"
+    }
+
+    # 1. 启动时立即清理一次
+    _ghostty_clean_conda_path
+    
+    # 2. 添加到 precmd 钩子，确保每次命令执行后（如 conda deactivate 后）都会再次清理
+    # 这样可以防止 conda 命令自动把 base bin 加回 PATH
+    if [[ ! ${precmd_functions[(ie)_ghostty_clean_conda_path]} -le ${#precmd_functions} ]]; then
+        precmd_functions+=(_ghostty_clean_conda_path)
+    fi
+fi
+# <<< Ghostty Conda Python Isolation <<<
+
+# ===== 美化 =====
+
+# 启用颜色支持
+#autoload -Uz colors && colors
+
+# 设置带颜色的 prompt
+#PROMPT='%F{green}%n@%m%f:%F{blue}%~%f%#'
+
+# ===== Python 工具统一配置 (VenvG_Native) =====
+export VENVG_ROOT="/home/casuki/VenvG_Native"
+
+# Conda
+# export PATH="$VENVG_ROOT/miniforge3/bin:$PATH"  # commented out by conda initialize
+
+# uv
+export PATH="$VENVG_ROOT/uv-bin:$PATH"
+export UV_CACHE_DIR="$VENVG_ROOT/uv-cache"
+export UV_PYTHON_DOWNLOAD=false
+export UV_MANAGED_PYTHON=false
+
+# pip
+export PIP_CACHE_DIR="$VENVG_ROOT/pip-cache"
+
+# 创建所有必要目录
+mkdir -p "$VENVG_ROOT"/{miniforge3,uv-bin,uv-cache,pip-cache}
+
+# ====== 配置 HuggingFace ======
+export HF_HOME="/mnt/g/Dataset_Models/HuggingFace"
+export HF_ENDPOINT=https://hf-mirror.com
+
+export MODELSCOPE_CACHE="/mnt/g/Dataset_Models/ModelScope"
+
+# ====== 配置 Rust ======
+# 设置安装根目录
+export RUSTUP_HOME="$VENVG_ROOT/rust/rustup"
+# 设置 Cargo 主目录（包含二进制文件和缓存）
+export CARGO_HOME="$VENVG_ROOT/rust/cargo"
+export PATH="$CARGO_HOME/bin:$PATH"
+# 设置清华镜像源
+export RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
+export RUSTUP_UPDATE_ROOT=https://mirrors.tuna.tsinghua.edu.cn/rustup/rustup
+
+# ====== 配置CUDA Toolkits ======
+export PATH="/home/casuki/VenvG_Native/cuda-toolkits/cuda-13.0/bin:$PATH"
+export LD_LIBRARY_PATH="/home/casuki/VenvG_Native/cuda-toolkits/cuda-13.0/lib64:$LD_LIBRARY_PATH"
+
+# ====== 配置Typst ======
+export PATH="/home/casuki/VenvG_Native/typst/:$PATH"
+
+# ====== 配置Lean4 ======
+export ELAN_HOME="/home/casuki/VenvG_Native/lean/lean_4.2.1"
+
+# ====== 配置GenAct ======
+export PATH="/home/casuki/ExtraG/App/GenAct:$PATH"
+
+# ====== 配置.net8 ======
+export DOTNET_ROOT="/home/casuki/VenvG_Native/dotnet/"
+export PATH=$PATH:$DOTNET_ROOT
+
+# ====== Zsh 原生补全 (替代 /etc/bash_completion) =====
+# 加载补全系统
+autoload -Uz compinit
+compinit
+
+# ===== 其他 =====
+alias neofetch='fastfetch'
+
+
+# 引入~/.profile
+source ~/.user-profile

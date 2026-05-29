@@ -1,0 +1,11 @@
+# 缓存目录
+cache-dir = "/home/casuki/VenvG_Native/uv-cache"
+
+# Python 安装
+python-downloads = "never"
+
+python-preference = "system"
+
+# 默认索引源（可选，清华镜像）
+index-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+

@@ -1,0 +1,32 @@
+{
+  "asusControlCenter": {
+    "enabled": true
+  },
+  "linuxWallpaperEngine": {
+    "enabled": true,
+    "generateStaticWallpaper": false
+  },
+  "mpvpaperWallpaper": {
+    "enabled": false,
+    "panscanValue": 0.94,
+    "allMonitors": false,
+    "monitorPaths": {
+      "eDP-1": "/home/casuki/ExtraG/documents/Gallary/WallPapers/WallPaper_Wanderer_Sumeru_2k_optimized.mp4"
+    },
+    "panscanEnabled": true,
+    "loopPlaylist": true,
+    "generateStaticWallpaper": true,
+    "periodicRestart": true,
+    "allMonitorsPath": "/home/casuki/ExtraG/documents/Gallary/WallPapers/WallPaper_Wanderer_Sumeru_2k_optimized.mp4"
+  },
+  "dankTodo": {
+    "enabled": true
+  },
+  "emojiLauncher": {
+    "enabled": true,
+    "recentEmojis": "🤨,🤔,🤫,🤗,👆,🤓,😐"
+  },
+  "tasks": {
+    "enabled": true
+  }
+}

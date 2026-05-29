@@ -1,0 +1,176 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/casuki/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+# Additionally, each config option is also explained in detail
+# on Ghostty's website, at https://ghostty.org/docs/config.
+#
+# Ghostty can reload the configuration while running by using the menu
+# options or the bound key (default: Command + Shift + comma on macOS and
+# Control + Shift + comma on other platforms). Not all config options can be
+# reloaded while running; some only apply to new windows and others may require
+# a full restart to take effect.
+
+# Config syntax crash course
+# ==========================
+# # The config file consists of simple key-value pairs,
+# # separated by equals signs.
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # Spacing around the equals sign does not matter.
+# # All of these are identical:
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # Any line beginning with a # is a comment. It's not possible to put
+# # a comment after a config option, since it would be interpreted as a
+# # part of the value. For example, this will have a value of "#123abc":
+# background = #123abc
+#
+# # Empty values are used to reset config keys to default.
+# key =
+#
+# # Some config options have unique syntaxes for their value,
+# # which is explained in the docs for that config option.
+# # Just for example:
+# resize-overlay-duration = 4s 200ms
+
+# 这是 Ghostty 的配置文件。
+#
+# 由于 Ghostty 在您的系统中找不到任何现有的配置文件，因此已自动在以下路径创建了此模板文件：
+#
+#   /home/casuki/.config/ghostty/config
+#
+# 该模板未设置任何默认选项，因为 Ghostty 为所有选项都提供了合理的默认值。用户只需设置他们希望更改的选项即可。
+#
+# 运行 `ghostty +show-config --default --docs` 可查看所有可用配置选项及其默认值的列表。
+#
+# 此外，每个配置选项的详细说明也可以在 Ghostty 官方网站上找到：https://ghostty.org/docs/config。
+#
+# Ghostty 支持在运行时重新加载配置，可以通过菜单选项或绑定的快捷键实现（默认情况下：macOS 上是 Command + Shift + 逗号，其他平台上是 Control + Shift + 逗号）。并非所有配置选项都能在运行时重新加载；有些仅对新窗口生效，而另一些可能需要完全重启才能生效。
+
+# 配置语法速成
+# ==========================
+# # 配置文件由简单的键值对组成，
+# # 使用等号分隔。
+# font-family = Iosevka
+# window-padding-x = 2
+#
+# # 等号周围的空格不影响解析。
+# # 以下所有写法都是等效的：
+# key=value
+# key= value
+# key =value
+# key = value
+#
+# # 任何以 # 开头的行都是注释。无法在配置选项后添加注释，
+# # 因为 # 之后的内容会被解释为值的一部分。例如，下面的配置
+# # 其值将是 "#123abc"：
+# background = #123abc
+#
+# # 空值用于将配置键重置为默认值。
+# key =
+#
+# # 某些配置选项具有独特的值语法，
+# # 具体说明请参阅该选项的文档。
+# # 举个例子：
+# resize-overlay-duration = 4s 200ms
+
+
+
+# ===== 配置终端 =====
+#终端增强集成，默认为“detect”自动检测，这里显式指定 zsh
+shell-integration = zsh
+# 告诉 Shell 当前是 Ghostty 环境，然后再~/.zshrc检测到ghostty环境后会自动退出默认conda环境
+env = GHOSTTY_TERM=1
+#zsh启动，可以用`echo $SHELL`为bash和`ps -p $$`为zsh验证没有改变系统shell
+command = /usr/bin/zsh -l
+
+
+# ===== Ghostty 字体配置 =====
+
+# ===== Ghostty 主题和颜色配置 =====
+#指定Arcoiris主题
+theme = Arcoiris
+#光标颜色
+cursor-color = FFFFFF
+#光标的粗细
+adjust-cursor-thickness = 2
+#光标不透明度
+cursor-opacity = 0.7
+#选中文本的前景色
+selection-foreground = 000000
+#选中文本的背景色
+selection-background = FFFFFF
+
+# ===== Ghostty 鼠标和剪贴板配置 =====
+#右键直接粘贴,当然,鼠标中键还是可以正常粘贴的
+right-click-action = paste
+#输入时隐藏鼠标
+mouse-hide-while-typing = true
+clipboard-read = allow
+clipboard-write = allow
+#粘贴时自动修剪末尾空格
+clipboard-trim-trailing-spaces = true
+
+# ===== Ghostty 窗口和界面配置 =====
+#设置窗口client装饰栏
+window-decoration = client
+#初始窗口width
+window-width = 128
+#初始窗口height
+window-height = 32
+#终端的背景图
+background-image = /mnt/g/Casuki_Fedora/documents/Gallary/Fedora/fedora-bbg-dark++nobg-1024.png
+#背景图像的不透明度(0.3)
+background-image-opacity = 0.01
+#背景图像位置
+background-image-position = bottom-right
+#背景图像匹配
+background-image-fit = contain
+#背景不透明度(0.9)
+background-opacity = 0.8
+#未聚焦分割窗格的不透明度(0.7)
+unfocused-split-opacity = 0.9
+#未聚焦分割窗格的颜色
+unfocused-split-fill = FFFFFF
+
+# ===== Ghostty 终端行为配置 =====
+#强制窗口标题始终使用该标题
+title = "Ghostty"
+#启用 URL 匹配
+link-url = true
+
+# ===== Ghostty 快捷键配置 =====
+#有选区时复制，无选区时透传终止信号给 shell (保留ctrl+shift+c)
+keybind = performable:ctrl+c=copy_to_clipboard
+#Ctrl+V从剪切板粘贴 (保留ctrl+shift+v)
+keybind = ctrl+v=paste_from_clipboard
+
+# ===== Ghostty 其他设置 =====
+#输入时自动清除选区（避免误操作）
+selection-clear-on-typing = true
+#复制后自动清除选区
+selection-clear-on-copy = true
+
+# --- Quick Terminal ---
+quick-terminal-position = top
+quick-terminal-screen = mouse
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+
+keybind = global:alt+backquote=toggle_quick_terminal
+

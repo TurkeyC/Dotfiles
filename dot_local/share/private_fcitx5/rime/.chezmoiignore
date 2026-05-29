@@ -1,0 +1,9 @@
+# .chezmoiignore
+user.yaml
+installation.yaml
+build/
+*.log
+*.old
+wanxiang-lts-zh-hans.gram
+rime_ice.userdb/
+sync/

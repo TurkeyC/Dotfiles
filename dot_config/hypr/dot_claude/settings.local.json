@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x *)",
+      "Bash(hyprctl version *)",
+      "Bash(hyprctl dispatchers *)",
+      "Bash(hyprctl dispatch *)",
+      "Bash(hyprctl help *)",
+      "Bash(hyprctl systeminfo *)",
+      "Bash(hyprctl keywords *)",
+      "WebFetch(domain:wiki.hyprland.org)",
+      "Bash(rpm -ql hyprland)",
+      "Bash(grep -E \"\\\\.conf$|\\\\.lua$\")",
+      "Bash(pacman -Ql hyprland)",
+      "Bash(hyprctl -h)",
+      "WebFetch(domain:wiki.hypr.land)",
+      "WebSearch",
+      "Bash(dnf search *)",
+      "Bash(dnf copr *)",
+      "Bash(noctalia --help)",
+      "Bash(noctalia msg *)",
+      "Bash(hyprpm list *)",
+      "Bash(hyprctl keyword *)",
+      "Bash(hyprpm update *)",
+      "Read(//home/casuki/.local/share/**)",
+      "Read(//usr/lib/hyprland/**)",
+      "Read(//usr/**)",
+      "Bash(hyprctl plugins *)",
+      "Bash(hyprctl eval *)",
+      "Read(//home/casuki/.cache/**)",
+      "Read(//tmp/**)",
+      "Read(//home/casuki/**)",
+      "Read(//var/cache/hyprpm/casuki/hyprland-plugins/**)",
+      "Bash(hyprshell run *)",
+      "Bash(hyprshell config *)"
+    ]
+  }
+}
