@@ -33,3 +33,10 @@ patch:
   "translator/contextual_suggestions": true
   "translator/max_homophones": 7
   "translator/max_homographs": 7
+
+  # ---- CapsLock 交给 fcitx5 处理，Rime 不参与 ----
+  "ascii_composer/good_old_caps_lock": false
+  "ascii_composer/switch_key":
+    Caps_Lock: noop
+    Shift_L: clear
+    Shift_R: clear
