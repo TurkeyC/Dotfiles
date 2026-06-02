@@ -500,7 +500,8 @@
         },
         {
           "id": "music",
-          "enabled": true
+          "enabled": true,
+          "mediaSize": 0
         },
         {
           "id": "clock",

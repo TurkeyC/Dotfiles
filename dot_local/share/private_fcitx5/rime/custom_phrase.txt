@@ -62,3 +62,8 @@ gone	gone
 Go程	gocheng
 code	code
 SOHO	soho
+
+什么意思	smys
+解释一下	jsyx
+翻译	fy
+详细说明	xxsm

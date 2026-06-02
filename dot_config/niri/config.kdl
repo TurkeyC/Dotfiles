@@ -778,6 +778,15 @@ window-rule {
     default-column-width { proportion 0.02; }
 }
 
+// 悬浮文件选择窗口xdg-desktop-portal-gtk
+window-rule {
+    match app-id="xdg-desktop-portal-gtk"
+    open-floating true
+    // default-window-height { proportion 0.05; }
+    // default-column-width { proportion 0.02; }
+}
+
+
 // 游戏全屏
 window-rule {
     match app-id="steam_app_default"
